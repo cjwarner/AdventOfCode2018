@@ -22,11 +22,39 @@ namespace AdventOfCode2018
         }
 
         [TestMethod]
+        public void Part1_Test2()
+        {
+            var day3 = new Day3Logic();
+
+            var claims = day3.ReadFile(@"Day3\Day3a.txt");
+
+            var canvas = day3.DrawClaims(claims, 8, 8);
+
+            Assert.AreEqual(4, day3.CountOverlaps(canvas));
+        }
+
+        [TestMethod]
         public void Part1_Answer()
         {
-            List<Day3Logic.Claim> claims = new Day3Logic().ReadFile(@"Day3\Day3.txt");
+            var day3 = new Day3Logic();
 
+            List<Day3Logic.Claim> claims = day3.ReadFile(@"Day3\Day3.txt");
 
+            var canvas = day3.DrawClaims(claims);
+
+            Assert.AreEqual(97218, day3.CountOverlaps(canvas));
+        }
+
+        [TestMethod]
+        public void Part2_Answer()
+        {
+            var day3 = new Day3Logic();
+
+            List<Day3Logic.Claim> claims = day3.ReadFile(@"Day3\Day3.txt");
+
+            var canvas = day3.DrawClaims(claims);
+
+            Assert.AreEqual(717, day3.FindClaimWithoutOverlaps(claims, canvas));
         }
     }
 }

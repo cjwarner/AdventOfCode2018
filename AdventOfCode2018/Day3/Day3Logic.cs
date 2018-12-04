@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,22 +9,81 @@ namespace AdventOfCode2018
 {
     public class Day3Logic
     {
-        public void DrawClaims(List<Claim> claims)
+        public int[,] DrawClaims(List<Claim> claims, int canvas_width = 1000, int canvas_height = 1000)
         {
-            var canvas = new int[1000, 1000];
+            var canvas = new int[canvas_width, canvas_height];
             for (int x = 0; x < canvas.GetLength(0); x += 1)
             {
                 for (int y = 0; y < canvas.GetLength(1); y += 1)
                     canvas[x, y] = '.';
             }
 
-            //foreach (var claim in claims)
+            foreach (var claim in claims)
+            {
+                for (int i = claim.Left; i < claim.Left + claim.Width; i++)
+                {
+                    for (int j = claim.Top; j < claim.Top + claim.Height; j++)
+                    {
+                        if (canvas[i, j] == '.')
+                            canvas[i, j] = 'A';
+                        else if (canvas[i, j] == 'A')
+                            canvas[i, j] = 'X';
+                    }
+                }
+            }
+
+            //for (int x = 0; x < canvas.GetLength(0); x++)
             //{
-            //    for (int i = 0; i < claim; i++)
+            //    for (int y = 0; y < canvas.GetLength(1); y++)
             //    {
-            //        canvas[claim.Left - 1, claim.Top - 1] = 'X';
+            //        Debug.Write(Char.ConvertFromUtf32(canvas[x, y]));
             //    }
+            //    Debug.WriteLine("");
             //}
+
+            return canvas;
+        }
+
+        public int CountOverlaps(int[,] canvas)
+        {
+            var overlaps = 0;
+
+            for (int x = 0; x < canvas.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < canvas.GetLength(1); y += 1)
+                {
+                    if (canvas[x, y] == 'X')
+                        overlaps++;
+                }
+            }
+
+            return overlaps;
+        }
+
+        public int FindClaimWithoutOverlaps(List<Claim> claims, int[,] canvas)
+        {
+            int claimNo = 0;
+            foreach (var claim in claims)
+            {
+                bool overlaps = false;
+                
+                for (int i = claim.Left; i < claim.Left + claim.Width; i++)
+                {
+                    for (int j = claim.Top; j < claim.Top + claim.Height; j++)
+                    {
+                        if (canvas[i, j] == 'X')
+                            overlaps = true;
+                    }
+                }
+
+                if (!overlaps)
+                {
+                    claimNo = claim.Number;
+                    break;
+                }
+            }
+
+            return claimNo;
         }
 
         public class Claim
