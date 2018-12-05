@@ -13,19 +13,32 @@ namespace AdventOfCode2018
             var shift = Day4Logic.ShiftInfo.Parse("[1518-11-01 00:00] Guard #10 begins shift");
         }
 
+        private int CountSleepingMinutes(char[] array)
+        {
+            int minutesSleeping = 0;
+            foreach (var item in array)
+            {
+                if (item == Day4Logic.GuardSleep.SLEEP)
+                    minutesSleeping++;
+            }
+
+            return minutesSleeping;
+        }
+
         [TestMethod]
         public void Part1_Test1a()
         {
             var day4 = new Day4Logic();
 
-            var shifts = day4.ReadFile(@"Day4\Day4a.txt");
-
-            var guardInfo = day4.DetermineGuardInfo(shifts);
+            var tuple = day4.ReadFile(@"Day4\Day4.txt");
         }
 
         [TestMethod]
         public void Part1_Answer()
         {
+            var day4 = new Day4Logic();
+
+            day4.ReadFile(@"Day4\Day4.txt");
         }
 
         [TestMethod]
