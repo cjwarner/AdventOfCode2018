@@ -81,7 +81,6 @@ namespace AdventOfCode2018
 
                     if ((i == text.Length - 2) || (text.Length == 0))
                         complete = true;
-
                 }
 
                 if ((text.Length == 0))
