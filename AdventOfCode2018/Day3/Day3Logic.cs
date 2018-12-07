@@ -32,14 +32,14 @@ namespace AdventOfCode2018
                 }
             }
 
-            //for (int x = 0; x < canvas.GetLength(0); x++)
-            //{
-            //    for (int y = 0; y < canvas.GetLength(1); y++)
-            //    {
-            //        Debug.Write(Char.ConvertFromUtf32(canvas[x, y]));
-            //    }
-            //    Debug.WriteLine("");
-            //}
+            for (int x = 0; x < canvas.GetLength(0); x++)
+            {
+                for (int y = 0; y < canvas.GetLength(1); y++)
+                {
+                    Debug.Write(Char.ConvertFromUtf32(canvas[x, y]));
+                }
+                Debug.WriteLine("");
+            }
 
             return canvas;
         }
